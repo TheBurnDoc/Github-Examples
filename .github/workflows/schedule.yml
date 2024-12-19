@@ -2,6 +2,11 @@ name: Test schedule
 
 on:
   workflow_dispatch:
+    inputs:
+      myvar: 
+        default: "Hello World!"
+        type: string
+        
 
   schedule:
     - cron: '*/2 * * * *'
@@ -12,4 +17,6 @@ jobs:
     steps:
       - name: Echo current time
         run: echo "The current server time is $(date)"
+      - name: Echo the message
+        run: echo "${{ inputs.myvar }}"
   
