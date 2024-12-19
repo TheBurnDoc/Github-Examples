@@ -2,14 +2,12 @@ name: Test workflow
 on:
   workflow_dispatch:
     inputs:
-      message: 
-        default: "Hello World!"
+      message:
         type: string
 
   repository_dispatch:
     types:
       - webhook
-     
 
 jobs:
   hello_world:
@@ -18,5 +16,5 @@ jobs:
       - name: Echo current time
         run: echo "The current server time is $(date)"
       - name: Echo the message
-        run: echo "${{ inputs.message }}"
+        run: echo "${{ inputs.message || github.event.client_payload.message || 'Hello World!' }}"
   
