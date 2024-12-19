@@ -1,11 +1,15 @@
-name: Test schedule
-
+name: Test workflow
 on:
   workflow_dispatch:
     inputs:
-      myvar: 
+      message: 
         default: "Hello World!"
         type: string
+
+  repository_dispatch:
+    types:
+      - webhook
+     
 
 jobs:
   hello_world:
@@ -14,5 +18,5 @@ jobs:
       - name: Echo current time
         run: echo "The current server time is $(date)"
       - name: Echo the message
-        run: echo "${{ inputs.myvar }}"
+        run: echo "${{ inputs.message }}"
   
